@@ -1,24 +1,31 @@
-import logo from './logo.svg';
+import { Container, Typography } from '@material-ui/core';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import './App.css';
+import Header from './Components/Header/Header';
+import CatégoriePage from './Pages/CatégoriePage/CatégoriePage';
+import Home from './Pages/Home/Home';
+import NotFound from './Pages/NotFound/NotFound';
+import SingleBusinessPage from './Pages/SingleBusinessPage/SingleBusinessPage';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Header />
+      <Switch>
+        <Route exact path="/">
+          <Home />
+        </Route>
+        <Route exact path="/place/:nom">
+          <SingleBusinessPage />
+        </Route>
+        <Route exact path="/catégories/:categorie">
+          <CatégoriePage />
+        </Route>
+        <Route>
+          <NotFound />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 
