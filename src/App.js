@@ -7,6 +7,8 @@ import Connexion from './Pages/Connexion/Connexion';
 import Home from './Pages/Home/Home';
 import NotFound from './Pages/NotFound/NotFound';
 import SingleBusinessPage from './Pages/SingleBusinessPage/SingleBusinessPage';
+import Inscription from './Pages/Inscription/Inscription';
+import MotdePasseOublié from './Pages/MotDePasseOublié/MotdePasseOublié';
 
 function App() {
   return (
@@ -24,6 +26,12 @@ function App() {
         </Route>
         <Route exact path="/connexion">
           <Connexion />
+        </Route>
+        <Route exact path="/inscription">
+          <Inscription />
+        </Route>
+        <Route exact path="/mot-de-passe-oublié">
+          <MotdePasseOublié />
         </Route>
         <Route>
           <NotFound />
