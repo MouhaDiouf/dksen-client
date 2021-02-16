@@ -14,6 +14,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
+import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -27,6 +28,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('sm')]: {
       display: 'block',
     },
+    textDecoration: 'none',
+    color: 'white',
   },
   search: {
     position: 'relative',
@@ -43,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
       width: 'auto',
     },
   },
+
   searchIcon: {
     padding: theme.spacing(0, 2),
     height: '100%',
@@ -173,8 +177,14 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
-            Dksen
+          <Typography
+            component={Link}
+            to="/"
+            className={classes.title}
+            variant="h6"
+            noWrap
+          >
+            Dakarsen
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon}>

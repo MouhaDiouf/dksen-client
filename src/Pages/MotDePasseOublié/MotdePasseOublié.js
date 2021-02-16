@@ -10,9 +10,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
-import AlertMessage from '../../components/AlertMessage/AlertMessage';
+// import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
+import AlertMessage from '../../Components/AlertMessage/AlertMessage';
 import { useHistory } from 'react-router-dom';
 
 function Copyright() {
@@ -21,7 +21,7 @@ function Copyright() {
       {'Copyright © '}
       <Link color="inherit" href="https://material-ui.com/"></Link>{' '}
       {new Date().getFullYear()}
-      {' DakarSen .'}
+      {' DakarSen'}
     </Typography>
   );
 }
@@ -43,6 +43,9 @@ const useStyles = makeStyles((theme) => ({
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
+  textBody: {
+    margin: '20px 0',
+  },
   loadingImg: {
     width: '30px',
     height: '30px',
@@ -57,40 +60,33 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function ForgotPassword() {
-  const {
-    resetPasswordEmailSent,
-    resetPasswordEmailUnsent,
-    resetingPassword,
-    emailSentMessage,
-    emailUnsentMessage,
-    user,
-  } = useSelector((state) => state.userReducer);
+  //   const {
+  //     resetPasswordEmailSent,
+  //     resetPasswordEmailUnsent,
+  //     resetingPassword,
+  //     emailSentMessage,
+  //     emailUnsentMessage,
+  //     user,
+  //   } = useSelector((state) => state.userReducer);
 
   const history = useHistory();
 
   const classes = useStyles();
   const [email, setemail] = useState('');
-  const dispatch = useDispatch();
+  //   const dispatch = useDispatch();
 
   const handlePasswordRecovery = (e) => {
     e.preventDefault();
 
-    dispatch(recoverPassword(email));
+    // dispatch(recoverPassword(email));
     setemail('');
   };
 
-  if (user) {
-    history.push('/');
-  }
+  //   if (user) {
+  //     history.replace('/');
+  //   }
   return (
     <Container component="main" maxWidth="xs">
-      {resetPasswordEmailSent && (
-        <AlertMessage message={emailSentMessage} type="success" />
-      )}
-      {resetPasswordEmailUnsent &&
-        emailUnsentMessage.map((error, idx) => (
-          <AlertMessage key={idx} message={error} type="error" />
-        ))}
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
@@ -99,15 +95,11 @@ export default function ForgotPassword() {
         <Typography component="h1" variant="h5">
           Mot de passe oublié
         </Typography>
-        <Typography variant="body2">
-          Mot de passe perdu? Veuillez saisir votre identifiant ou adresse mail.
-          Vous recevrez un lien pour créer un nouveau mot de passe par e-mail.
+        <Typography variant="body2" className={classes.textBody}>
+          Mot de passe perdu? Veuillez saisir votre adresse mail. Vous recevrez
+          un lien pour créer un nouveau mot de passe par e-mail.
         </Typography>
-        <form
-          className={classes.form}
-          noValidate
-          onSubmit={handlePasswordRecovery}
-        >
+        <form className={classes.form} noValidate>
           <Grid container spacing={2}>
             <TextField
               variant="standard"
@@ -127,7 +119,6 @@ export default function ForgotPassword() {
             fullWidth
             variant="contained"
             color="primary"
-            disabled={resetingPassword}
             className={classes.submit}
           >
             Réinitialiser mot de passe
