@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Card } from '@material-ui/core';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 function CatégorieSlide({ nom, img }) {
   const history = useHistory();
   const Container = styled.div`

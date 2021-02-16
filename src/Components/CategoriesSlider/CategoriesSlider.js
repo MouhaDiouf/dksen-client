@@ -15,7 +15,7 @@ export default class AutoPlay extends Component {
       autoplay: true,
       speed: 500,
       autoplaySpeed: 2000,
-      cssEase: 'linear',
+      cssEase: 'ease-in-out',
       responsive: [
         {
           breakpoint: 1024,
