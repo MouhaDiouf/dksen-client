@@ -12,6 +12,7 @@ import RatingDisplay from '../Rating/RatingDisplay';
 const useStyles = makeStyles({
   root: {
     maxWidth: 250,
+    margin: '10px',
   },
 });
 

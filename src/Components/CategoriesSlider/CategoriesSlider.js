@@ -45,8 +45,8 @@ export default class AutoPlay extends Component {
     return (
       <div>
         <Slider {...settings}>
-          {catégories.map((catégorie) => (
-            <CatégorieSlide {...catégorie} />
+          {catégories.map((catégorie, idx) => (
+            <CatégorieSlide key={idx} {...catégorie} />
           ))}
         </Slider>
       </div>

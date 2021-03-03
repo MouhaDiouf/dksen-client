@@ -5,13 +5,16 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import reportWebVitals from './reportWebVitals';
+import { ColorProvider } from './Context';
 
 ReactDOM.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Provider>,
+  <ColorProvider>
+    <Provider store={store}>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Provider>
+  </ColorProvider>,
   document.getElementById('root')
 );
 

@@ -1,11 +1,10 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import { Link as BrowserLink } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
@@ -13,8 +12,13 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import { useDispatch } from 'react-redux';
+import { connexionAction } from '../../redux/actions/userActions';
+import { ColorContext } from '../../Context';
 
 function Copyright() {
+  const theme = useContext(ColorContext);
+  console.log('Theme is ', theme);
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       Copyright &copy; DakarSen {new Date().getFullYear()}
@@ -45,7 +49,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SignIn() {
   const classes = useStyles();
+  const [email, setemail] = useState('');
+  const [password, setpassword] = useState('');
+  const dispatch = useDispatch('');
 
+  const handleConnexion = (e) => {
+    e.preventDefault();
+    console.log(email, password);
+    const connexionDetails = { email, password };
+    dispatch(connexionAction(connexionDetails));
+  };
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -56,7 +69,7 @@ export default function SignIn() {
         <Typography component="h1" variant="h5">
           Connexion
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={handleConnexion}>
           <TextField
             variant="outlined"
             margin="normal"
@@ -66,7 +79,9 @@ export default function SignIn() {
             label="Email"
             name="email"
             autoComplete="email"
+            value={email}
             autoFocus
+            onChange={(e) => setemail(e.target.value)}
           />
           <TextField
             variant="outlined"
@@ -78,6 +93,8 @@ export default function SignIn() {
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setpassword(e.target.value)}
           />
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}

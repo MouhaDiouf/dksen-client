@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import { Link as BrowserLink } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { inscriptionAction } from '../../redux/actions/userActions';
 
 function Copyright() {
   return (
@@ -48,7 +50,25 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function SignUp() {
+  const dispatch = useDispatch('');
   const classes = useStyles();
+  const [prenom, setprenom] = useState('');
+  const [nom, setnom] = useState('');
+  const [email, setemail] = useState('');
+  const [telephone, settelephone] = useState('');
+  const [password, setpassword] = useState('');
+  const { inscription_en_cours } = useSelector((state) => state.userReducer);
+  const inscriptionHandler = (e) => {
+    e.preventDefault();
+    const user = {
+      prenom,
+      nom,
+      email,
+      telephone,
+      password,
+    };
+    dispatch(inscriptionAction(user));
+  };
 
   return (
     <Container component="main" maxWidth="xs">
@@ -58,9 +78,9 @@ export default function SignUp() {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Inscription
         </Typography>
-        <form className={classes.form} noValidate>
+        <form className={classes.form} noValidate onSubmit={inscriptionHandler}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <TextField
@@ -72,6 +92,8 @@ export default function SignUp() {
                 id="prénom"
                 label="Prénom"
                 autoFocus
+                value={prenom}
+                onChange={(e) => setprenom(e.target.value)}
               />
             </Grid>
             <Grid item xs={12} sm={6}>
@@ -83,6 +105,8 @@ export default function SignUp() {
                 label="Nom"
                 name="nom"
                 autoComplete="nom"
+                value={nom}
+                onChange={(e) => setnom(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -95,6 +119,8 @@ export default function SignUp() {
                 name="email"
                 type="email"
                 autoComplete="email"
+                value={email}
+                onChange={(e) => setemail(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -106,6 +132,8 @@ export default function SignUp() {
                 label="Téléphone"
                 name="téléphone"
                 autoComplete="téléphone"
+                value={telephone}
+                onChange={(e) => settelephone(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -118,6 +146,8 @@ export default function SignUp() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={(e) => setpassword(e.target.value)}
               />
             </Grid>
             <Grid item xs={12}>
@@ -133,6 +163,7 @@ export default function SignUp() {
             variant="contained"
             color="primary"
             className={classes.submit}
+            disabled={inscription_en_cours}
           >
             S'inscrire
           </Button>

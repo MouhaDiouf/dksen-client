@@ -19,7 +19,7 @@ export default function HalfRating() {
     <div className={classes.root}>
       <Rating
         name="half-rating-read"
-        defaultValue={3}
+        defaultValue={3.2}
         precision={0.1}
         readOnly
       />
